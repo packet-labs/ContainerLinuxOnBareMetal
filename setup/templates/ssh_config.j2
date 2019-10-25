@@ -1,0 +1,5 @@
+{% for ip in hosts_ips %}
+Host node{{ loop.index }}
+	HostName {{ ip }}
+	User core
+{% endfor %}
