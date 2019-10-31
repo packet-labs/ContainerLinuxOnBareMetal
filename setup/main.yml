@@ -1,0 +1,13 @@
+---
+- hosts: labs
+  gather_facts: false
+  become: no
+  tasks:
+    - include_vars: defaults/main.yml
+    - include_tasks: tasks/preflight.yml
+    - include_tasks: tasks/prepare.yml
+    - include_tasks: tasks/lab.yml
+  handlers:
+    - import_tasks: handlers/main.yml
+  vars:
+    ansible_connection: local

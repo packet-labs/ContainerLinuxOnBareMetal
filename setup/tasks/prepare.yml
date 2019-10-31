@@ -1,0 +1,36 @@
+- name: Install unzip
+  package:
+    name: unzip
+    state: present
+  run_once: true
+  delegate_to: localhost
+  tags:
+    - prepare
+
+- name: Check if terraform is installed
+  stat:
+    path: "/usr/local/bin/terraform"
+  register: tf_bin
+
+- name: Install terraform if not already present
+  unarchive:
+    src: "https://releases.hashicorp.com/terraform/{{ terraform_version }}/terraform_{{ terraform_version }}_linux_amd64.zip"
+    dest: /usr/local/bin
+    remote_src: yes
+  run_once: true
+  delegate_to: localhost
+  when: not tf_bin.stat.exists
+  tags:
+    - prepare
+
+- name: Allow password auth for lab users
+  run_once: true
+  delegate_to: localhost
+  blockinfile:
+    path: /etc/ssh/sshd_config
+    block: |
+      Match User lab*
+      PasswordAuthentication yes
+  notify: reload sshd
+  tags:
+    - prepare
