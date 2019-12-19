@@ -5,7 +5,7 @@ resource "packet_ssh_key" "ssh-key" {
 
 # testing with IPv6
 #resource "packet_reserved_ip_block" "elastic_ip" {
-#  project_id = "${var.packet_project_id}"
+#  project_id = "var.packet_project_id"
 #  type       = "public_ipv4"
 #  quantity   = 1
 #}
@@ -21,8 +21,10 @@ resource "packet_device" "hosts" {
   billing_cycle    = "hourly"
   project_id       = var.packet_project_id
   count            = var.instance_count
+  tags             = [var.lab_name]
 
-  tags = [var.lab_name]
+  user_data        = templatefile("userdata.tmpl", {})
+#  user_data        = file("userdata.tmpl")
 
   connection {
     host        = self.access_public_ipv4
