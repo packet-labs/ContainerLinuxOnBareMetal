@@ -19,6 +19,5 @@ output "IPv6_Anycast_Curl_Command" {
 }
 
 output "SSH_Access_Server_0" {
-  value = "ssh root@${packet_device.hosts[0].access_public_ipv4} -i mykey"
+  value = "ssh core@${packet_device.hosts[0].access_public_ipv4} -i mykey"
 }
-
