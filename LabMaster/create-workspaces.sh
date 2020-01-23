@@ -3,20 +3,18 @@
 # account running this script should have sudo group 
 # 
 if [ "$#" -ne 5 ] ; then
-  echo "Usage: $0 BGP-Password Packet-Auth-Token Packet-Project-ID Number-Workspaces-To-Create Facility" >&2
+  echo "Usage: $0 Packet-Auth-Token Packet-Project-ID Number-Workspaces-To-Create Facility" >&2
   exit 1
 fi
 
 #must be lower case since usernames must be lowercase
 LAB_NAME="flatcar"
 
-BGP_PASSWORD="$1"
-PACKET_AUTH_TOKEN="$2"
-PACKET_PROJECT_ID="$3"
-NUMBER_WORKSPACES="$4"
-FACILITY="$5"
+PACKET_AUTH_TOKEN="$1"
+PACKET_PROJECT_ID="$2"
+NUMBER_WORKSPACES="$3"
+FACILITY="$4"
 
-echo BGP_PASSWORD=$BGP_PASSWORD
 echo PACKET_AUTH_TOKEN=$PACKET_AUTH_TOKEN
 echo PACKET_PROJECT_ID=$PACKET_PROJECT_ID
 echo NUMBER_WORKSPACES=$NUMBER_WORKSPACES
@@ -43,7 +41,6 @@ do
   sudo chmod 2775 /home/$USER
 
   echo ""                                       >  Workspace/terraform.tfvars
-  echo bgp_md5 = \"$BGP_PASSWORD\"              >> Workspace/terraform.tfvars
   echo packet_auth_token=\"$PACKET_AUTH_TOKEN\" >> Workspace/terraform.tfvars
   echo packet_project_id=\"$PACKET_PROJECT_ID\" >> Workspace/terraform.tfvars
   echo lab_number=\"$i\"                        >> Workspace/terraform.tfvars

@@ -10,7 +10,7 @@ variable "packet_auth_token" {
 
 variable "hostname" {
   description = "Lab hostname"
-  default     = "anycast-lab-master"
+  default     = "flatcar-lab-master"
 }
 
 variable "packet_facility" {
@@ -28,10 +28,6 @@ variable "operating_system" {
   default     = "ubuntu_18_04"
 }
 
-variable "bgp_password" {
-  description = "BGP password configured with Packet upstream router"
-  default     = "ExamplePassword1234"
-}
 
 variable "number_labs" {
   description = "Number of labs to create"

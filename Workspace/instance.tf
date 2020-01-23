@@ -3,13 +3,6 @@ resource "packet_ssh_key" "ssh-key" {
   public_key = file("mykey.pub")
 }
 
-# testing with IPv6
-#resource "packet_reserved_ip_block" "elastic_ip" {
-#  project_id = "var.packet_project_id"
-#  type       = "public_ipv4"
-#  quantity   = 1
-#}
-
 resource "packet_device" "hosts" {
   depends_on = [packet_ssh_key.ssh-key]
 
@@ -23,8 +16,7 @@ resource "packet_device" "hosts" {
   count            = var.instance_count
   tags             = [var.lab_name]
 
-  user_data        = templatefile("userdata.tmpl", {})
-#  user_data        = file("userdata.tmpl")
+  user_data        = "${data.ignition_config.remote.rendered}"
 
   connection {
     host        = self.access_public_ipv4
@@ -34,3 +26,13 @@ resource "packet_device" "hosts" {
   }
 }
 
+
+data "http" "publicv4" {
+  url = "http://ipv4.icanhazip.com"
+}
+
+data "ignition_config" "remote" {
+    replace {
+      # source = "http://${chomp(data.http.publicv4.body)}/ignition.json"
+    }
+}
