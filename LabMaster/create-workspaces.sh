@@ -2,7 +2,7 @@
 #
 # account running this script should have sudo group 
 # 
-if [ "$#" -ne 5 ] ; then
+if [ "$#" -ne 4 ] ; then
   echo "Usage: $0 Packet-Auth-Token Packet-Project-ID Number-Workspaces-To-Create Facility" >&2
   exit 1
 fi
