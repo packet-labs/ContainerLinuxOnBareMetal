@@ -13,6 +13,10 @@ resource "null_resource" "lab-software" {
     source      = "nginx_userdir.conf"
     destination = "/etc/nginx/conf.d/userdir.conf"
   }
+  provisioner "file" {
+    source      = "sim-fist-boot.sh"
+    destination = "/usr/local/bin/sim-first-boot"
+  }
   provisioner "remote-exec" {
     inline = [
       "apt-get update",
