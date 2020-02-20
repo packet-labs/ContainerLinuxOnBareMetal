@@ -16,7 +16,7 @@ resource "packet_device" "hosts" {
   count            = var.instance_count
   tags             = [var.lab_name]
 
-  user_data        = "${data.ignition_config.remote.rendered}"
+  user_data        = data.ignition_config.remote.rendered
 
   connection {
     host        = self.access_public_ipv4
@@ -33,6 +33,6 @@ data "http" "publicv4" {
 
 data "ignition_config" "remote" {
     replace {
-      # source = "http://${chomp(data.http.publicv4.body)}/ignition.json"
+      source = "http://${chomp(data.http.publicv4.body)}/ignition.json"
     }
 }
