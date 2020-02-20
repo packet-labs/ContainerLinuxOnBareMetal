@@ -27,7 +27,7 @@ In real life, any change to the ignition config should trigger a complete redepl
 
 The simulation will trigger a reboot and use the `~/ignition.json` in your lab home directory.
 
-Let's get started by making a simple Container Linux config file. Open `~/hello.yaml` with your favorite editor:
+Let's get started by making a simple Container Linux config file which will create a file at the root of the filesystem. Open `~/hello.yaml` with your favorite editor:
 
 ```yaml
 storage:
