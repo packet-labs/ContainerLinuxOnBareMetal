@@ -9,10 +9,16 @@ resource "null_resource" "lab-software" {
     timeout     = "30s"
   }
 
+  provisioner "file" {
+    source      = "nginx_userdir.conf"
+    destination = "/etc/nginx/conf.d/userdir.conf"
+  }
   provisioner "remote-exec" {
     inline = [
       "apt-get update",
-      "apt-get install git unzip -y",
+      "apt-get install git unzip nginx -y",
+      "rm /etc/nginx/sites-enabled/default",
+      "systemctl reload nginx",
       "wget https://releases.hashicorp.com/terraform/0.12.16/terraform_0.12.16_linux_amd64.zip",
       "unzip terraform_0.12.16_linux_amd64.zip",
       "mv terraform /usr/local/bin",
