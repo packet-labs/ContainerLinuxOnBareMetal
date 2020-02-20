@@ -33,6 +33,6 @@ data "http" "publicv4" {
 
 data "ignition_config" "remote" {
     replace {
-      source = "http://${chomp(data.http.publicv4.body)}/ignition.json"
+      source = "http://${chomp(data.http.publicv4.body)}/${var.lab_name}/ignition.json"
     }
 }
