@@ -23,6 +23,8 @@ resource "null_resource" "lab-software" {
       "unzip terraform_0.12.16_linux_amd64.zip",
       "mv terraform /usr/local/bin",
       "rm terraform_0.12.16_linux_amd64.zip",
+      "wget -O /usr/local/bin/ct https://github.com/coreos/container-linux-config-transpiler/releases/download/v0.9.0/ct-v0.9.0-x86_64-unknown-linux-gnu",
+      "chmox +x /usr/local/bin/ct",
     ]
   }
 }
