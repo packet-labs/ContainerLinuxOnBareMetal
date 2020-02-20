@@ -24,7 +24,7 @@ In this first lab, you'll be verifying that you can log into all the physical ba
 
 ## Layout
 
-```
+```text
                                      +--------------------+
                                      |                    |
                                      |                 +--v-------------------+
@@ -32,27 +32,26 @@ In this first lab, you'll be verifying that you can log into all the physical ba
                                      |                 | student dedicated    |
 +----------------------+   SSH       |                 | login: core          |
 |                      +-------------+                 +----------------------+
-| Lab Master           |                               
+| Lab Master           |
 | Terraform            |            SSH                +----------------------+
-| shared by students   |------------------------------>+ node2                |              
+| shared by students   |------------------------------>+ node2                |
 | login: labXX         +---v                           | student dedicated    |
 +----------------------+   |                           | login: core          |
                            |                           +----------------------+
-                           |                           
+                           |
                            |                           +----------------------+
                            |                           | node3                |
                            |                           | student dedicated    |
                            +-------------------------->+ login: core          |
                                     SSH                +----------------------+
-                                                       
-```
 
+```
 
 ## Lab Master Access
 
 With your assigned lab username (i.e. lab03), log into the lab master server using your assigned lab and the password. You'll need to use a SSH client (i.e. PuTTy).
 
-```
+```shell
 ssh <your_lab_username>@<lab_master_server>
 ```
 
@@ -63,21 +62,24 @@ Do a quick check that all your assigned hosts are available. These Ansible comma
 ### List Lab Hosts
 
 You should have a total of two hosts assigned to you.
-```
+
+```shell
 ansible-inventory -i inventory.ini --list
 ```
 
 ### Verify Lab Host Networking
 
 Verify that all machines return a ping OK.
-```
+
+```shell
 ansible -i inventory.ini all -m raw -a "echo pong" -o
 ```
 
 ### Verify SSH Access
 
 Lookup the master node IP and verify that SSH works.
-```
+
+```shell
 ssh node1
 ```
 
