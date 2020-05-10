@@ -59,3 +59,26 @@ Once the server is back online, let's check the content of the `/hello` file:
 $ cat /hello
 Hello world
 ```
+
+## Automatic updates
+
+We can use Container Linux Config to define an update strategy, for instance the following will reboot the server as soon as an update is available:
+
+```yaml
+locksmith:
+  reboot_strategy: "reboot"
+```
+
+We could also configure a weekly maintenance window with:
+
+```yaml
+locksmith:
+  reboot_strategy: reboot
+  window_start: Thu 04:00
+  window_length: 1h
+```
+
+## Container Linux Config
+
+You can use Container Linux config to configure things like RAID configuration, users, authorized SSH keys, filesystems, systemd units, custom docker flags and much more. We will showcase some of them in the following labs, but you want to learn more you can check [offical examples](https://docs.flatcar-linux.org/container-linux-config-transpiler/doc/examples/)
+and [configuration reference](https://docs.flatcar-linux.org/container-linux-config-transpiler/doc/configuration/)

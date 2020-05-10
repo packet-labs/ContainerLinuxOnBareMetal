@@ -1,15 +1,11 @@
-# ContainerLinuxOnBareMetal
+# Container Linux on Bare Metal Workshop
+
 Workshop covering best practices for running a Containerized Linux such as Flat Car on Bare Metal without diving into Kubernetes.
 
-
-# Topics
+## Topics
 
 * Clustering Nodes
 * Central Services
-* Upgrading Nodes in a Production Cluster (LockSmith https://github.com/flatcar-linux/locksmith)
+* Upgrading Nodes in a Production Cluster with [LockSmith](https://github.com/flatcar-linux/locksmith)
 * Scaling a Cluster
 * Securing the Nodes
-
-
-
-
